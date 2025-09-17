@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab); /* Deep purple gradient */
+  min-height: 100vh;
+  margin: 0;
+  color: #f4f4f4;
+}
+
+:root {
+  --menu-width: 280px;
+  --collapsed-width: 70px;
+}
+
+/* Sidebar */
+aside {
+  padding: 10px;
+  position: fixed;
+  min-height: 100vh;
+  width: var(--menu-width);
+  transition: 0.3s ease;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.6);
+  background: rgba(20, 20, 40, 0.85); /* Dark bluish with glass */
+  backdrop-filter: blur(15px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+
+  display: flex;           /* ✅ Make sidebar flex */
+  flex-direction: column;  /* Vertical layout */
+}
+
+.collapsed aside {
+  width: var(--collapsed-width);
+}
+
+/* Toggle button */
+.menu-btn {
+  color: #f7f5f5;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  padding: 8px;
+  border: none;
+  font-size: 18px;
+  aspect-ratio: 1;
+  border-radius: 0 50% 50% 0;
+  cursor: pointer;
+  transform: translateX(100%);
+  box-shadow: 2px 0px 5px rgba(8, 8, 8, 0.3);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Logo */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 10px;
+  text-decoration: none;
+  color: #f4f1f1;
+  font-size: 24px;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.brand-name {
+  transition: 0.3s;
+}
+
+.collapsed .brand-name {
+  width: 0;
+  visibility: hidden;
+  transition-delay: 0s;
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(247, 242, 242, 0.2);
+}
+
+/* Menu items */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-items {
+  margin-top: 15px;
+}
+
+.menu-items a,
+.bottom-items a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #f7f5f5;
+  border-radius: 10px;
+  font-size: 18px;
+  transition: 0s;
+}
+
+.menu-items a:hover {
+  color: #fff;
+  background: rgba(113, 111, 111, 0.4);
+}
+
+/* Logout special hover */
+.bottom-items {
+  margin-top: auto;
+  position: absolute;
+  bottom: 20px; /* Adjust spacing */
+  width: 100%;
+}
+
+
+.bottom-items a:hover {
+  color: #fff;
+  background: linear-gradient(90deg, #ff512f, #dd2476); /* Red-pink logout hover */
+  box-shadow: 0px 0px 10px rgba(255, 50, 100, 0.5);
+}
+
+.icon {
+  font-size: 22px;
+}
+
+.item-name {
+  transition: 0s;
+}
+
+.collapsed .item-name {
+  width: 0;
+  visibility: hidden;
+  transition-delay: 0s;
+}
+
+/* Tooltips */
+.menu-items li,
+.bottom-items li {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, transform 0.3s;
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translate(100%, -50%);
+  white-space: nowrap;
+}
+
+.collapsed .menu-items a:hover + .tooltip,
+.collapsed .bottom-items a:hover + .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(calc(100% + 5px), -50%);
+}
+
+/* Main content */
+main {
+  position: relative;
+  left: calc(var(--menu-width) + 20px);
+  width: calc(100% - (var(--menu-width) + 40px));
+  transition: 0.3s;
+  padding: 40px;
+  color: #f8f6f6;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.collapsed main {
+  left: calc(var(--collapsed-width) + 20px);
+  width: calc(100% - (var(--collapsed-width) + 40px));
+}
+
+/* Intro section */
+.intro-section {
+  text-align: left;  /* cleaner than center */
+  max-width: 700px;
+  margin: auto;
+  padding: 40px;
+}
+
+.intro-section h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.intro-section h3 {
+  font-size: 20px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.intro-section p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #eee;
+}
+
+
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  aside {
+    position: absolute;
+    height: 100%;
+    transform: translateX(-100%);
+  }
+
+  body.sidebar-open aside {
+    transform: translateX(0);
+  }
+
+  main {
+    left: 0;
+    width: 100%;
+  }
+}
+
+
